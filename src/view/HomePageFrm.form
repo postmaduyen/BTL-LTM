@@ -58,21 +58,9 @@
                           <Component id="findRoomButton" alignment="0" pref="127" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="playWithBotButton" pref="127" max="32767" attributes="0"/>
-                          <Component id="scoreBotButton" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="scoreBotButton" min="-2" pref="127" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="friendListButton" max="32767" attributes="0"/>
-                          <Component id="exitGameButton" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="messageInput" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="sendMessageButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="exitGameButton" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -86,25 +74,14 @@
               <Component id="frameLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="messageInput" alignment="3" pref="29" max="32767" attributes="0"/>
-                  <Component id="sendMessageButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="goRoomButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="quickGameButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="createRoomButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="findRoomButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="playWithBotButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="friendListButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="findRoomButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="scoreBoardButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -194,7 +171,7 @@
                                       <Component id="rankValue" min="-2" pref="90" max="-2" attributes="0"/>
                                       <Component id="drawValue" alignment="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -411,57 +388,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quickGameButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="playWithBotButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ch&#x1a1;i v&#x1edb;i m&#xe1;y"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playWithBotButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="friendListButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch b&#x1ea1;n b&#xe8;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="friendListButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="goRoomButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="V&#xe0;o ph&#xf2;ng"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goRoomButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextArea" name="messageTextArea">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="&lt;&lt;Tin nh&#x1eaf;n v&#xe0; tin t&#x1ee9;c&gt;&gt;&#xa;"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JTextField" name="messageInput">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="messageInputKeyPressed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="sendMessageButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="G&#x1eed;i"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendMessageButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

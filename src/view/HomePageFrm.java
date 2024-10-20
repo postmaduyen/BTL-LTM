@@ -32,8 +32,6 @@ public class HomePageFrm extends javax.swing.JFrame {
         numberOfWinValue.setText(Integer.toString(Client.user.getNumberOfWin()));
         numberOfGameValue.setText(Integer.toString(Client.user.getNumberOfGame()));
         jLabel8.setIcon(new ImageIcon("assets/avatar/" + Client.user.getAvatar() + ".jpg"));
-        sendMessageButton.setIcon(new ImageIcon("assets/image/send2.png"));
-        messageTextArea.setEditable(false);
         if (Client.user.getNumberOfGame() == 0) {
             winRatioValue.setText("-");
         } else {
@@ -77,13 +75,7 @@ public class HomePageFrm extends javax.swing.JFrame {
         scoreBotButton = new javax.swing.JButton();
         exitGameButton = new javax.swing.JButton();
         quickGameButton = new javax.swing.JButton();
-        playWithBotButton = new javax.swing.JButton();
-        friendListButton = new javax.swing.JButton();
         goRoomButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        messageTextArea = new javax.swing.JTextArea();
-        messageInput = new javax.swing.JTextField();
-        sendMessageButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -211,7 +203,7 @@ public class HomePageFrm extends javax.swing.JFrame {
                                     .addComponent(winRatioValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(rankValue, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(drawValue, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 21, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -277,42 +269,10 @@ public class HomePageFrm extends javax.swing.JFrame {
             }
         });
 
-        playWithBotButton.setText("Chơi với máy");
-        playWithBotButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playWithBotButtonActionPerformed(evt);
-            }
-        });
-
-        friendListButton.setText("Danh sách bạn bè");
-        friendListButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friendListButtonActionPerformed(evt);
-            }
-        });
-
         goRoomButton.setText("Vào phòng");
         goRoomButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goRoomButtonActionPerformed(evt);
-            }
-        });
-
-        messageTextArea.setColumns(20);
-        messageTextArea.setRows(5);
-        messageTextArea.setText("<<Tin nhắn và tin tức>>\n");
-        jScrollPane1.setViewportView(messageTextArea);
-
-        messageInput.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                messageInputKeyPressed(evt);
-            }
-        });
-
-        sendMessageButton.setText("Gửi");
-        sendMessageButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendMessageButtonActionPerformed(evt);
             }
         });
 
@@ -336,18 +296,9 @@ public class HomePageFrm extends javax.swing.JFrame {
                             .addComponent(scoreBoardButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(findRoomButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(playWithBotButton, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                            .addComponent(scoreBotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(scoreBotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(friendListButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(messageInput)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sendMessageButton)))
+                        .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -357,22 +308,13 @@ public class HomePageFrm extends javax.swing.JFrame {
                 .addComponent(frameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(messageInput, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(sendMessageButton))
-                .addGap(18, 18, 18)
+                .addGap(148, 148, 148)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(goRoomButton)
                     .addComponent(quickGameButton)
                     .addComponent(createRoomButton))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(findRoomButton)
-                    .addComponent(playWithBotButton)
-                    .addComponent(friendListButton))
+                .addComponent(findRoomButton)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(scoreBoardButton)
@@ -431,57 +373,14 @@ public class HomePageFrm extends javax.swing.JFrame {
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_exitGameButtonActionPerformed
 
-    private void friendListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendListButtonActionPerformed
-        Client.closeView(Client.View.HOMEPAGE);
-        Client.openView(Client.View.FRIEND_LIST);
-    }//GEN-LAST:event_friendListButtonActionPerformed
-
     private void quickGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quickGameButtonActionPerformed
         Client.closeView(Client.View.HOMEPAGE);
         Client.openView(Client.View.FIND_ROOM);
     }//GEN-LAST:event_quickGameButtonActionPerformed
 
-    private void playWithBotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playWithBotButtonActionPerformed
-        // TODO add your handling code here:
-        Client.openView(Client.View.GAME_AI);
-    }//GEN-LAST:event_playWithBotButtonActionPerformed
-
     private void goRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goRoomButtonActionPerformed
         Client.openView(Client.View.ROOM_NAME_FRM);
     }//GEN-LAST:event_goRoomButtonActionPerformed
-
-    private void sendMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageButtonActionPerformed
-        sendMessage();
-    }//GEN-LAST:event_sendMessageButtonActionPerformed
-
-    private void messageInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageInputKeyPressed
-        if (evt.getKeyCode() == 10) {
-            sendMessage();
-        }
-    }//GEN-LAST:event_messageInputKeyPressed
-
-    private void sendMessage() {
-        try {
-            if (messageInput.getText().isEmpty()) {
-                throw new Exception("Vui lòng nhập nội dung tin nhắn");
-            }
-            String temp = messageTextArea.getText();
-            temp += "Tôi: " + messageInput.getText() + "\n";
-            messageTextArea.setText(temp);
-            Client.socketHandle.write("chat-server," + messageInput.getText());
-            messageInput.setText("");
-            messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        }
-    }
-
-    public void addMessage(String message) {
-        String temp = messageTextArea.getText();
-        temp += message + "\n";
-        messageTextArea.setText(temp);
-        messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createRoomButton;
@@ -490,29 +389,23 @@ public class HomePageFrm extends javax.swing.JFrame {
     private javax.swing.JButton exitGameButton;
     private javax.swing.JButton findRoomButton;
     private javax.swing.JLabel frameLabel;
-    private javax.swing.JButton friendListButton;
     private javax.swing.JButton goRoomButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel markLabel;
     private javax.swing.JLabel markValue;
-    private javax.swing.JTextField messageInput;
-    private javax.swing.JTextArea messageTextArea;
     private javax.swing.JLabel numberOfGameLabel;
     private javax.swing.JLabel numberOfGameValue;
     private javax.swing.JLabel numberOfWinLabel;
     private javax.swing.JLabel numberOfWinValue;
-    private javax.swing.JButton playWithBotButton;
     private javax.swing.JButton quickGameButton;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JLabel rankValue;
     private javax.swing.JButton scoreBoardButton;
     private javax.swing.JButton scoreBotButton;
-    private javax.swing.JButton sendMessageButton;
     private javax.swing.JLabel winRatioLabel;
     private javax.swing.JLabel winRatioValue;
     // End of variables declaration//GEN-END:variables

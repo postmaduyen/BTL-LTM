@@ -100,11 +100,11 @@ public class SocketHandle implements Runnable {
                     Client.loginFrm.showError("Tài khoản đã đăng nhập ở nơi khác");
                 }
                 //Tài khoản đã bị banned
-                if (messageSplit[0].equals("banned-user")) {
-                    Client.closeView(Client.View.GAME_NOTICE);
-                    Client.openView(Client.View.LOGIN, messageSplit[1], messageSplit[2]);
-                    Client.loginFrm.showError("Tài khoản đã bị ban");
-                }
+//                if (messageSplit[0].equals("banned-user")) {
+//                    Client.closeView(Client.View.GAME_NOTICE);
+//                    Client.openView(Client.View.LOGIN, messageSplit[1], messageSplit[2]);
+//                    Client.loginFrm.showError("Tài khoản đã bị ban");
+//                }
                 //Xử lý register trùng tên
                 if (messageSplit[0].equals("duplicate-username")) {
                     Client.closeAllViews();
@@ -283,16 +283,16 @@ public class SocketHandle implements Runnable {
                     Client.openView(Client.View.HOMEPAGE);
                 }
                 //Xử lý bị banned
-                if (messageSplit[0].equals("banned-notice")) {
-                    Client.socketHandle.write("offline," + Client.user.getID());
-                    Client.closeAllViews();
-                    Client.openView(Client.View.LOGIN);
-                    JOptionPane.showMessageDialog(Client.loginFrm, messageSplit[1], "Bạn đã bị BAN", JOptionPane.WARNING_MESSAGE);
-                }
+//                if (messageSplit[0].equals("banned-notice")) {
+//                    Client.socketHandle.write("offline," + Client.user.getID());
+//                    Client.closeAllViews();
+//                    Client.openView(Client.View.LOGIN);
+//                    JOptionPane.showMessageDialog(Client.loginFrm, messageSplit[1], "Bạn đã bị BAN", JOptionPane.WARNING_MESSAGE);
+//                }
                 //Xử lý cảnh cáo
-                if (messageSplit[0].equals("warning-notice")) {
-                    JOptionPane.showMessageDialog(null, messageSplit[1], "Bạn nhận được một cảnh cáo", JOptionPane.WARNING_MESSAGE);
-                }
+//                if (messageSplit[0].equals("warning-notice")) {
+//                    JOptionPane.showMessageDialog(null, messageSplit[1], "Bạn nhận được một cảnh cáo", JOptionPane.WARNING_MESSAGE);
+//                }
             }
         } catch (Exception e) {
             e.printStackTrace();

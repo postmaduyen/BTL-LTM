@@ -30,7 +30,7 @@ public class Client {
     public static RankFrm rankFrm;
     public static GameNoticeFrm gameNoticeFrm;
     public static FriendRequestFrm friendRequestFrm;
-    public static GameAIFrm gameAIFrm;
+//    public static GameAIFrm gameAIFrm;
     public static RoomNameFrm roomNameFrm;
     public static SocketHandle socketHandle;
     
@@ -95,10 +95,10 @@ public class Client {
                     rankFrm = new RankFrm();
                     rankFrm.setVisible(true);
                     break;
-                case GAME_AI:
-                    gameAIFrm = new GameAIFrm();
-                    gameAIFrm.setVisible(true);
-                    break;
+//                case GAME_AI:
+//                    gameAIFrm = new GameAIFrm();
+//                    gameAIFrm.setVisible(true);
+//                    break;
                 case ROOM_NAME_FRM:
                     roomNameFrm = new RoomNameFrm();
                     roomNameFrm.setVisible(true);
@@ -196,9 +196,9 @@ public class Client {
                 case FRIEND_REQUEST:
                     friendRequestFrm.dispose();
                     break;
-                case GAME_AI:
-                    gameAIFrm.dispose();
-                    break;
+//                case GAME_AI:
+//                    gameAIFrm.dispose();
+//                    break;
                 case ROOM_NAME_FRM:
                     roomNameFrm.dispose();
                     break;
@@ -231,7 +231,7 @@ public class Client {
         if (rankFrm != null) rankFrm.dispose();
         if (gameNoticeFrm != null) gameNoticeFrm.dispose();
         if (friendRequestFrm != null) friendRequestFrm.dispose();
-        if (gameAIFrm != null) gameAIFrm.dispose();
+//        if (gameAIFrm != null) gameAIFrm.dispose();
         if (roomNameFrm != null) roomNameFrm.dispose();
     }
 

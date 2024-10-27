@@ -22,20 +22,20 @@ public class SocketHandle implements Runnable {
     private Socket socketOfClient;
 
     public List<User> getListUser(String[] message) {
-        List<User> friend = new ArrayList<>();
+        List<User> userlist = new ArrayList<>();
         for (int i = 1; i < message.length; i = i + 4) {
-            friend.add(new User(Integer.parseInt(message[i]),
+            userlist.add(new User(Integer.parseInt(message[i]),
                     message[i + 1],
                     message[i + 2].equals("1"),
                     message[i + 3].equals("1")));
         }
-        return friend;
+        return userlist;
     }
 
     public List<User> getListRank(String[] message) {
-        List<User> friend = new ArrayList<>();
+        List<User> userlist = new ArrayList<>();
         for (int i = 1; i < message.length; i = i + 9) {
-            friend.add(new User(Integer.parseInt(message[i]),
+            userlist.add(new User(Integer.parseInt(message[i]),
                     message[i + 1],
                     message[i + 2],
                     message[i + 3],
@@ -45,7 +45,7 @@ public class SocketHandle implements Runnable {
                     Integer.parseInt(message[i + 7]),
                     Integer.parseInt(message[i + 8])));
         }
-        return friend;
+        return userlist;
     }
 
     public User getUserFromString(int start, String[] message) {
@@ -111,12 +111,12 @@ public class SocketHandle implements Runnable {
                     Client.openView(Client.View.REGISTER);
                     JOptionPane.showMessageDialog(Client.registerFrm, "Tên tài khoản đã được người khác sử dụng");
                 }
-                //Xử lý hiển thị thông tin đối thủ là bạn bè/không
-                if (messageSplit[0].equals("check-friend-response")) {
-                    if (Client.competitorInfoFrm != null) {
-                        Client.competitorInfoFrm.checkFriend((messageSplit[1].equals("1")));
-                    }
-                }
+//                //Xử lý hiển thị thông tin đối thủ là bạn bè/không
+//                if (messageSplit[0].equals("check-friend-response")) {
+//                    if (Client.competitorInfoFrm != null) {
+//                        Client.competitorInfoFrm.checkFriend((messageSplit[1].equals("1")));
+//                    }
+//                }
                 //Xử lý kết quả tìm phòng từ server
                 if (messageSplit[0].equals("room-fully")) {
                     Client.closeAllViews();
@@ -151,11 +151,14 @@ public class SocketHandle implements Runnable {
                     }
                     Client.roomListFrm.updateRoomList(rooms, passwords);
                 }
-                if (messageSplit[0].equals("return-friend-list")) {
-                    if (Client.friendListFrm != null) {
-                        Client.friendListFrm.updateFriendList(getListUser(messageSplit));
+                //Xử lý xem danh sách người chơi toàn server
+                if (messageSplit[0].equals("return-world-users-list")) {
+                    if (Client.homePageFrm != null) {
+                        Client.homePageFrm.updateWorldUsersList(getListUser(messageSplit));
                     }
                 }
+                
+                //Xử lý vào phòng
                 if (messageSplit[0].equals("go-to-room")) {
                     System.out.println("Vào phòng");
                     int roomID = Integer.parseInt(messageSplit[1]);
@@ -197,11 +200,11 @@ public class SocketHandle implements Runnable {
                         Client.waitingRoomFrm.setRoomPassword("Mật khẩu phòng: " + messageSplit[2]);
                 }
                 //Xử lý yêu cầu kết bạn tới
-                if (messageSplit[0].equals("make-friend-request")) {
-                    int ID = Integer.parseInt(messageSplit[1]);
-                    String nickname = messageSplit[2];
-                    Client.openView(Client.View.FRIEND_REQUEST, ID, nickname);
-                }
+//                if (messageSplit[0].equals("make-friend-request")) {
+//                    int ID = Integer.parseInt(messageSplit[1]);
+//                    String nickname = messageSplit[2];
+//                    Client.openView(Client.View.FRIEND_REQUEST, ID, nickname);
+//                }
                 //Xử lý khi nhận được yêu cầu thách đấu
                 if (messageSplit[0].equals("duel-notice")) {
                     int res = JOptionPane.showConfirmDialog(Client.getVisibleJFrame(), "Bạn nhận được lời thách đấu của " + messageSplit[2] + " (ID=" + messageSplit[1] + ")", "Xác nhận thách đấu", JOptionPane.YES_NO_OPTION);

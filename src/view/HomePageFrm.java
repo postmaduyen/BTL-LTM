@@ -5,8 +5,11 @@ import controller.Client;
 
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.User;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,9 +24,14 @@ public class HomePageFrm extends javax.swing.JFrame {
     /**
      * Creates new form GiaoDienChinhFrm
      */
+    private List<User> worldUsers;
+    DefaultTableModel defaultTableModel;
+    private boolean isClicked;
+    
     public HomePageFrm() {
         initComponents();
-        this.setTitle("Caro Game Nhóm 5");
+        this.setTitle("Flip Memory Card nhóm 2");
+        defaultTableModel = (DefaultTableModel) worldUserTable.getModel();
         this.setIconImage(new ImageIcon("assets/image/caroicon.png").getImage());
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,8 +48,60 @@ public class HomePageFrm extends javax.swing.JFrame {
         drawValue.setText("" + Client.user.getNumberOfDraw());
         markValue.setText("" + (Client.user.getNumberOfGame() + Client.user.getNumberOfWin() * 10));
         rankValue.setText("" + Client.user.getRank());
+        requestUpdate();
+        startTableThreat();
     }
-
+    
+    
+    public void stopWorldtable(){
+        isClicked = true;
+    }
+    
+    public void startTableThreat(){
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                while (Client.homePageFrm.isDisplayable() && !isClicked) {
+                    try {
+                        System.out.println("Xem danh sách các người chơi toàn server đang chạy!");
+                        requestUpdate();
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
+    }
+    
+    public void requestUpdate() {
+        try {
+            Client.socketHandle.write("view-world-users-list,");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+    }
+    
+    public void updateWorldUsersList(List<User> allUsers) {
+        worldUsers = allUsers;
+        defaultTableModel.setRowCount(0);
+        ImageIcon icon;
+        for (User u : worldUsers) {
+            if (!u.isOnline()) {
+                icon = new ImageIcon("assets/icon/offline.png");
+            } else if (u.isPlaying()) {
+                icon = new ImageIcon("assets/icon/swords-mini.png");
+            } else {
+                icon = new ImageIcon("assets/icon/swords-1-mini.png");
+            }
+            defaultTableModel.addRow(new Object[]{
+                    "" + u.getID(),
+                    u.getNickname(),
+                    icon
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,6 +136,22 @@ public class HomePageFrm extends javax.swing.JFrame {
         exitGameButton = new javax.swing.JButton();
         quickGameButton = new javax.swing.JButton();
         goRoomButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Object[][] rows = {
+        };
+        String[] columns = {"ID","Nickname",""};
+        DefaultTableModel model = new DefaultTableModel(rows, columns){
+            @Override
+            public Class<?> getColumnClass(int column){
+                switch(column){
+                    case 0: return String.class;
+                    case 1: return String.class;
+                    case 2: return ImageIcon.class;
+                    default: return Object.class;
+                }
+            }
+        };
+        worldUserTable = new javax.swing.JTable();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -203,7 +279,7 @@ public class HomePageFrm extends javax.swing.JFrame {
                                     .addComponent(winRatioValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(rankValue, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(drawValue, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addGap(0, 21, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -276,6 +352,14 @@ public class HomePageFrm extends javax.swing.JFrame {
             }
         });
 
+        worldUserTable.setModel(model);
+        worldUserTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                worldUserTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(worldUserTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -284,21 +368,25 @@ public class HomePageFrm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(frameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(quickGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(scoreBoardButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(findRoomButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(scoreBotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(quickGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(goRoomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(createRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(goRoomButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(createRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(scoreBoardButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(findRoomButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(scoreBotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exitGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -307,19 +395,22 @@ public class HomePageFrm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(frameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goRoomButton)
-                    .addComponent(quickGameButton)
-                    .addComponent(createRoomButton))
-                .addGap(18, 18, 18)
-                .addComponent(findRoomButton)
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(scoreBoardButton)
-                    .addComponent(scoreBotButton)
-                    .addComponent(exitGameButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(148, 148, 148)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(goRoomButton)
+                            .addComponent(quickGameButton)
+                            .addComponent(createRoomButton))
+                        .addGap(18, 18, 18)
+                        .addComponent(findRoomButton)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(scoreBoardButton)
+                            .addComponent(scoreBotButton)
+                            .addComponent(exitGameButton)))
+                    .addComponent(jScrollPane1))
                 .addGap(25, 25, 25))
         );
 
@@ -382,6 +473,33 @@ public class HomePageFrm extends javax.swing.JFrame {
         Client.openView(Client.View.ROOM_NAME_FRM);
     }//GEN-LAST:event_goRoomButtonActionPerformed
 
+    private void worldUserTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_worldUserTableMouseClicked
+        // TODO add your handling code here:
+        try {
+            if (worldUserTable.getSelectedRow() == -1) return;
+            User u = worldUsers.get(worldUserTable.getSelectedRow());
+            if (!u.isOnline()) {
+                throw new Exception("Người chơi không online");
+            }
+            if (u.isPlaying()) {
+                throw new Exception("Người chơi đang trong trận đấu");
+            }
+            isClicked = true;
+            int res = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thách đấu người bạn này không", "Xác nhận thách đầu", JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION) {
+                Client.closeAllViews();
+                Client.openView(Client.View.GAME_NOTICE, "Thách đấu", "Đang chờ phản hồi từ đối thủ");
+                Client.socketHandle.write("duel-request," + u.getID());
+            } else {
+                isClicked = false;
+                startTableThreat();
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+    }//GEN-LAST:event_worldUserTableMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createRoomButton;
     private javax.swing.JLabel drawLabel;
@@ -395,6 +513,7 @@ public class HomePageFrm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel markLabel;
     private javax.swing.JLabel markValue;
     private javax.swing.JLabel numberOfGameLabel;
@@ -408,5 +527,6 @@ public class HomePageFrm extends javax.swing.JFrame {
     private javax.swing.JButton scoreBotButton;
     private javax.swing.JLabel winRatioLabel;
     private javax.swing.JLabel winRatioValue;
+    private javax.swing.JTable worldUserTable;
     // End of variables declaration//GEN-END:variables
 }

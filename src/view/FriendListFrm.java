@@ -144,17 +144,6 @@ public class FriendListFrm extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(friendTable);
-        if (friendTable.getColumnModel().getColumnCount() > 0) {
-            friendTable.getColumnModel().getColumn(0).setMinWidth(60);
-            friendTable.getColumnModel().getColumn(0).setPreferredWidth(60);
-            friendTable.getColumnModel().getColumn(0).setMaxWidth(60);
-            friendTable.getColumnModel().getColumn(1).setMinWidth(240);
-            friendTable.getColumnModel().getColumn(1).setPreferredWidth(240);
-            friendTable.getColumnModel().getColumn(1).setMaxWidth(240);
-            friendTable.getColumnModel().getColumn(2).setMinWidth(120);
-            friendTable.getColumnModel().getColumn(2).setPreferredWidth(120);
-            friendTable.getColumnModel().getColumn(2).setMaxWidth(120);
-        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

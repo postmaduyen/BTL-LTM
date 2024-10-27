@@ -78,8 +78,6 @@ public class GameClientFrm extends javax.swing.JFrame {
 
         isSending = false;
         isListening = false;
-        microphoneStatusButton.setIcon(new ImageIcon("assets/game/mute.png"));
-        speakerStatusButton.setIcon(new ImageIcon("assets/game/mutespeaker.png"));
 
         //init score
         userWin = 0;
@@ -117,8 +115,6 @@ public class GameClientFrm extends javax.swing.JFrame {
         competitorLabel.setFont(new Font("Arial", Font.BOLD, 15));
         roomNameLabel.setFont(new Font("Arial", Font.BOLD, 15));
         roomNameLabel.setAlignmentX(JLabel.CENTER);
-        sendButton.setBackground(Color.white);
-        sendButton.setIcon(new ImageIcon("assets/image/send2.png"));
         playerNicknameValue.setText(Client.user.getNickname());
         playerNumberOfGameValue.setText(Integer.toString(Client.user.getNumberOfGame()));
         playerNumberOfWinValue.setText(Integer.toString(Client.user.getNumberOfWin()));
@@ -130,14 +126,8 @@ public class GameClientFrm extends javax.swing.JFrame {
         competitorNumberOfWinValue.setText(Integer.toString(competitor.getNumberOfWin()));
         competotorButtonImage.setIcon(new ImageIcon("assets/game/" + competitor.getAvatar() + ".jpg"));
         competotorButtonImage.setToolTipText("Xem thông tin đối thủ");
-        playerCurrentPositionLabel.setVisible(false);
-        competitorPositionLabel.setVisible(false);
         drawRequestButton.setVisible(false);
-        playerTurnLabel.setVisible(false);
-        competitorTurnLabel.setVisible(false);
         countDownLabel.setVisible(false);
-        messageTextArea.setEditable(false);
-        scoreLabel.setText("Tỉ số: 0-0");
 
         //Setup timer
         second = 60;
@@ -234,7 +224,6 @@ public class GameClientFrm extends javax.swing.JFrame {
         jFrame3 = new javax.swing.JFrame();
         jFrame4 = new javax.swing.JFrame();
         playerNumberOfWinLabel = new javax.swing.JLabel();
-        playerTurnLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         playerNicknameLabel = new javax.swing.JLabel();
         playerNumberOfGameLabel = new javax.swing.JLabel();
@@ -258,15 +247,9 @@ public class GameClientFrm extends javax.swing.JFrame {
         competitorLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         roomNameLabel = new javax.swing.JLabel();
-        microphoneStatusButton = new javax.swing.JButton();
-        speakerStatusButton = new javax.swing.JButton();
-        scoreLabel = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         drawRequestButton = new javax.swing.JButton();
         sendButton = new javax.swing.JButton();
-        competitorTurnLabel = new javax.swing.JLabel();
-        playerCurrentPositionLabel = new javax.swing.JLabel();
-        competitorPositionLabel = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         playerButtonImage = new javax.swing.JLabel();
         vsIcon = new javax.swing.JLabel();
@@ -327,9 +310,6 @@ public class GameClientFrm extends javax.swing.JFrame {
         setAutoRequestFocus(false);
 
         playerNumberOfWinLabel.setText("Số ván thắng");
-
-        playerTurnLabel.setForeground(new java.awt.Color(255, 0, 0));
-        playerTurnLabel.setText("Đến lượt bạn");
 
         playerNicknameLabel.setText("Nickname");
 
@@ -429,20 +409,6 @@ public class GameClientFrm extends javax.swing.JFrame {
         roomNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         roomNameLabel.setText("{Tên Phòng}");
 
-        microphoneStatusButton.setToolTipText("Bật mic để nói chuyện cùng nhau");
-        microphoneStatusButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                microphoneStatusButtonActionPerformed(evt);
-            }
-        });
-
-        speakerStatusButton.setToolTipText("Âm thanh trò chuyện đang tắt");
-        speakerStatusButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                speakerStatusButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -450,24 +416,12 @@ public class GameClientFrm extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(roomNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(microphoneStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(speakerStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(roomNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(microphoneStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(speakerStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(roomNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
-
-        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scoreLabel.setText("Tỉ số:  0-0");
 
         jPanel5.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -499,13 +453,6 @@ public class GameClientFrm extends javax.swing.JFrame {
                 sendButtonActionPerformed(evt);
             }
         });
-
-        competitorTurnLabel.setForeground(new java.awt.Color(0, 0, 204));
-        competitorTurnLabel.setText("Đến lượt đối thủ");
-
-        playerCurrentPositionLabel.setText("x/o");
-
-        competitorPositionLabel.setText("x/o");
 
         jPanel6.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -617,15 +564,8 @@ public class GameClientFrm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(playerCurrentPositionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(39, 39, 39)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(41, 41, 41)
-                                                .addComponent(competitorPositionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(96, 96, 96)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addContainerGap()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -645,11 +585,9 @@ public class GameClientFrm extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(playerTurnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
+                                        .addGap(109, 109, 109)
                                         .addComponent(countDownLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(competitorTurnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(126, 126, 126))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -697,19 +635,9 @@ public class GameClientFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(competitorPositionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scoreLabel)
-                            .addComponent(playerCurrentPositionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(countDownLabel)
-                    .addComponent(competitorTurnLabel)
-                    .addComponent(playerTurnLabel))
+                .addComponent(jLabel7)
+                .addGap(45, 45, 45)
+                .addComponent(countDownLabel)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -737,22 +665,6 @@ public class GameClientFrm extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         exitGame();
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
-    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        try {
-            if (messageTextField.getText().isEmpty()) {
-                throw new Exception("Vui lòng nhập nội dung tin nhắn");
-            }
-            String temp = messageTextArea.getText();
-            temp += "Tôi: " + messageTextField.getText() + "\n";
-            messageTextArea.setText(temp);
-            Client.socketHandle.write("chat," + messageTextField.getText());
-            messageTextField.setText("");
-            messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        }
-    }//GEN-LAST:event_sendButtonActionPerformed
 
     private void drawRequestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawRequestButtonActionPerformed
 
@@ -787,50 +699,21 @@ public class GameClientFrm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_competotorButtonImageActionPerformed
 
-    private void microphoneStatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_microphoneStatusButtonActionPerformed
-        if (isSending) {
-            try {
-                Client.socketHandle.write("voice-message,close-mic");
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        try {
+            if (messageTextField.getText().isEmpty()) {
+                throw new Exception("Vui lòng nhập nội dung tin nhắn");
             }
-            microphoneStatusButton.setIcon(new ImageIcon("assets/game/mute.png"));
-            voiceCloseMic();
-            microphoneStatusButton.setToolTipText("Mic đang tắt");
-
-        } else {
-            try {
-                Client.socketHandle.write("voice-message,open-mic");
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
-            }
-            microphoneStatusButton.setIcon(new ImageIcon("assets/game/88634.png"));
-            voiceOpenMic();
-            microphoneStatusButton.setToolTipText("Mic đang bật");
+            String temp = messageTextArea.getText();
+            temp += "Tôi: " + messageTextField.getText() + "\n";
+            messageTextArea.setText(temp);
+            Client.socketHandle.write("chat," + messageTextField.getText());
+            messageTextField.setText("");
+            messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-    }//GEN-LAST:event_microphoneStatusButtonActionPerformed
-
-    private void speakerStatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakerStatusButtonActionPerformed
-        if (isListening) {
-            try {
-                Client.socketHandle.write("voice-message,close-speaker");
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
-            }
-            speakerStatusButton.setIcon(new ImageIcon("assets/game/mutespeaker.png"));
-            voiceStopListening();
-            speakerStatusButton.setToolTipText("Âm thanh trò chuyện đang tắt");
-        } else {
-            try {
-                Client.socketHandle.write("voice-message,open-speaker");
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
-            }
-            voiceListening();
-            speakerStatusButton.setIcon(new ImageIcon("assets/game/speaker.png"));
-            speakerStatusButton.setToolTipText("Âm thanh trò chuyện đang bật");
-        }
-    }//GEN-LAST:event_speakerStatusButtonActionPerformed
+    }//GEN-LAST:event_sendButtonActionPerformed
 
     private void messageTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageTextFieldKeyPressed
         if (evt.getKeyCode() == 10) {
@@ -930,7 +813,6 @@ public class GameClientFrm extends javax.swing.JFrame {
                                     Client.socketHandle.write("win," + a + "," + b);
                                 } else {
                                     Client.socketHandle.write("caro," + a + "," + b);
-                                    displayCompetitorTurn();
 
                                 }
                                 setEnableButton(false);
@@ -968,43 +850,11 @@ public class GameClientFrm extends javax.swing.JFrame {
         setEnableButton(true);
     }
 
-    public void displayCompetitorTurn() {
-        countDownLabel.setVisible(false);
-        competitorTurnLabel.setVisible(true);
-        competitorPositionLabel.setVisible(true);
-        playerTurnLabel.setVisible(false);
-        drawRequestButton.setVisible(false);
-        playerCurrentPositionLabel.setVisible(false);
-    }
-
-    public void displayUserTurn() {
-        countDownLabel.setVisible(false);
-        competitorTurnLabel.setVisible(false);
-        competitorPositionLabel.setVisible(false);
-        playerTurnLabel.setVisible(true);
-        drawRequestButton.setVisible(true);
-        playerCurrentPositionLabel.setVisible(true);
-    }
-
     public void startTimer() {
         countDownLabel.setVisible(true);
         second = 60;
         minute = 0;
         timer.start();
-    }
-
-    public void addMessage(String message) {
-        String temp = messageTextArea.getText();
-        temp += competitor.getNickname() + ": " + message + "\n";
-        messageTextArea.setText(temp);
-        messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
-    }
-
-    public void addCompetitorMove(String x, String y) {
-        displayUserTurn();
-        startTimer();
-        setEnableButton(true);
-        caro(x, y);
     }
 
     public void setLose(String xx, String yy) {
@@ -1015,18 +865,12 @@ public class GameClientFrm extends javax.swing.JFrame {
         Client.user.setNumberOfWin(Client.user.getNumberOfWin() + 1);
         playerNumberOfWinValue.setText("" + Client.user.getNumberOfWin());
         userWin++;
-        scoreLabel.setText("Tỉ số: " + userWin + "-" + competitorWin);
-        String tmp = messageTextArea.getText();
-        tmp += "--Bạn đã thắng, tỉ số hiện tại là " + userWin + "-" + competitorWin + "--\n";
-        messageTextArea.setText(tmp);
-        messageTextArea.setCaretPosition(messageTextArea.getDocument().getLength());
     }
 
     public void increaseWinMatchToCompetitor() {
         competitor.setNumberOfWin(competitor.getNumberOfWin() + 1);
         competitorNumberOfWinValue.setText("" + competitor.getNumberOfWin());
         competitorWin++;
-        scoreLabel.setText("Tỉ số: " + userWin + "-" + competitorWin);
         String tmp = messageTextArea.getText();
         tmp += "--Bạn đã thua, tỉ số hiện tại là " + userWin + "-" + competitorWin + "--\n";
         messageTextArea.setText(tmp);
@@ -1200,11 +1044,9 @@ public class GameClientFrm extends javax.swing.JFrame {
         if (numberOfMatch % 2 == 0) {
             JOptionPane.showMessageDialog(rootPane, "Đến lượt bạn đi trước");
             startTimer();
-            displayUserTurn();
             countDownLabel.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(rootPane, "Đối thủ đi trước");
-            displayCompetitorTurn();
         }
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -1220,9 +1062,6 @@ public class GameClientFrm extends javax.swing.JFrame {
         if (numberOfMatch % 2 != 0) {
             blockGame();
         }
-
-        playerCurrentPositionLabel.setIcon(new ImageIcon(iconItem[numberOfMatch % 2]));
-        competitorPositionLabel.setIcon(new ImageIcon(iconItem[not(numberOfMatch % 2)]));
         preButton = null;
         numberOfMatch++;
     }
@@ -1613,8 +1452,6 @@ public class GameClientFrm extends javax.swing.JFrame {
     private javax.swing.JLabel competitorNicknameValue;
     private javax.swing.JLabel competitorNumberOfWinLabel;
     private javax.swing.JLabel competitorNumberOfWinValue;
-    private javax.swing.JLabel competitorPositionLabel;
-    private javax.swing.JLabel competitorTurnLabel;
     private javax.swing.JButton competotorButtonImage;
     private javax.swing.JLabel competotorNumberOfGameLabel;
     private javax.swing.JLabel competotorNumberOfGameValue;
@@ -1640,10 +1477,8 @@ public class GameClientFrm extends javax.swing.JFrame {
     private javax.swing.JMenu mainMenu;
     private javax.swing.JTextArea messageTextArea;
     private javax.swing.JTextField messageTextField;
-    private javax.swing.JButton microphoneStatusButton;
     private javax.swing.JMenuItem newGameMenuItem;
     private javax.swing.JLabel playerButtonImage;
-    private javax.swing.JLabel playerCurrentPositionLabel;
     private javax.swing.JLabel playerLabel;
     private javax.swing.JLabel playerNicknameLabel;
     private javax.swing.JLabel playerNicknameValue;
@@ -1651,11 +1486,8 @@ public class GameClientFrm extends javax.swing.JFrame {
     private javax.swing.JLabel playerNumberOfGameValue;
     private javax.swing.JLabel playerNumberOfWinLabel;
     private javax.swing.JLabel playerNumberOfWinValue;
-    private javax.swing.JLabel playerTurnLabel;
     private javax.swing.JLabel roomNameLabel;
-    private javax.swing.JLabel scoreLabel;
     private javax.swing.JButton sendButton;
-    private javax.swing.JButton speakerStatusButton;
     private javax.swing.JLabel vsIcon;
     // End of variables declaration//GEN-END:variables
 

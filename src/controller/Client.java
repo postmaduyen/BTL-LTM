@@ -20,7 +20,6 @@ public class Client {
     public static RegisterFrm registerFrm;
     public static HomePageFrm homePageFrm;
     public static RoomListFrm roomListFrm;
-    public static FriendListFrm friendListFrm;
     public static FindRoomFrm findRoomFrm;
     public static WaitingRoomFrm waitingRoomFrm;
     public static GameClientFrm gameClientFrm;
@@ -29,7 +28,6 @@ public class Client {
     public static CompetitorInfoFrm competitorInfoFrm;
     public static RankFrm rankFrm;
     public static GameNoticeFrm gameNoticeFrm;
-    public static FriendRequestFrm friendRequestFrm;
 //    public static GameAIFrm gameAIFrm;
     public static RoomNameFrm roomNameFrm;
     public static SocketHandle socketHandle;
@@ -40,9 +38,6 @@ public class Client {
     public static JFrame getVisibleJFrame() {
         if (roomListFrm != null && roomListFrm.isVisible())
             return roomListFrm;
-        if (friendListFrm != null && friendListFrm.isVisible()) {
-            return friendListFrm;
-        }
         if (createRoomPasswordFrm != null && createRoomPasswordFrm.isVisible()) {
             return createRoomPasswordFrm;
         }
@@ -73,10 +68,6 @@ public class Client {
                 case ROOM_LIST:
                     roomListFrm = new RoomListFrm();
                     roomListFrm.setVisible(true);
-                    break;
-                case FRIEND_LIST:
-                    friendListFrm = new FriendListFrm();
-                    friendListFrm.setVisible(true);
                     break;
                 case FIND_ROOM:
                     findRoomFrm = new FindRoomFrm();
@@ -113,9 +104,6 @@ public class Client {
                     joinRoomPasswordFrm = new JoinRoomPasswordFrm(arg1, arg2);
                     joinRoomPasswordFrm.setVisible(true);
                     break;
-                case FRIEND_REQUEST:
-                    friendRequestFrm = new FriendRequestFrm(arg1, arg2);
-                    friendRequestFrm.setVisible(true);
             }
         }
     }
@@ -163,10 +151,6 @@ public class Client {
                 case ROOM_LIST:
                     roomListFrm.dispose();
                     break;
-                case FRIEND_LIST:
-                    friendListFrm.stopAllThread();
-                    friendListFrm.dispose();
-                    break;
                 case FIND_ROOM:
                     findRoomFrm.stopAllThread();
                     findRoomFrm.dispose();
@@ -193,12 +177,6 @@ public class Client {
                 case GAME_NOTICE:
                     gameNoticeFrm.dispose();
                     break;
-                case FRIEND_REQUEST:
-                    friendRequestFrm.dispose();
-                    break;
-//                case GAME_AI:
-//                    gameAIFrm.dispose();
-//                    break;
                 case ROOM_NAME_FRM:
                     roomNameFrm.dispose();
                     break;
@@ -212,10 +190,6 @@ public class Client {
         if (registerFrm != null) registerFrm.dispose();
         if (homePageFrm != null) homePageFrm.dispose();
         if (roomListFrm != null) roomListFrm.dispose();
-        if (friendListFrm != null) {
-            friendListFrm.stopAllThread();
-            friendListFrm.dispose();
-        }
         if (findRoomFrm != null) {
             findRoomFrm.stopAllThread();
             findRoomFrm.dispose();
@@ -230,8 +204,6 @@ public class Client {
         if (competitorInfoFrm != null) competitorInfoFrm.dispose();
         if (rankFrm != null) rankFrm.dispose();
         if (gameNoticeFrm != null) gameNoticeFrm.dispose();
-        if (friendRequestFrm != null) friendRequestFrm.dispose();
-//        if (gameAIFrm != null) gameAIFrm.dispose();
         if (roomNameFrm != null) roomNameFrm.dispose();
     }
 
@@ -252,7 +224,6 @@ public class Client {
         REGISTER,
         HOMEPAGE,
         ROOM_LIST,
-        FRIEND_LIST,
         FIND_ROOM,
         WAITING_ROOM,
         GAME_CLIENT,
@@ -261,8 +232,6 @@ public class Client {
         COMPETITOR_INFO,
         RANK,
         GAME_NOTICE,
-        FRIEND_REQUEST,
-        GAME_AI,
         ROOM_NAME_FRM
     }
 }

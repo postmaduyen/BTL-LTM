@@ -22,26 +22,18 @@ import model.User;
 public class RankFrm extends javax.swing.JFrame {
     private final DefaultTableModel tableModel;
     private List<User> listUserStatics;
-    private final List<String> rankSrc;
 
     /**
      * Creates new form RankFrm
      */
     public RankFrm() {
         initComponents();
-        this.setTitle("Caro Game Nhóm 5");
+        this.setTitle("Flip Memory Game nhóm 2");
         tableModel = (DefaultTableModel) rankTextArea.getModel();
         this.setIconImage(new ImageIcon("assets/image/caroicon.png").getImage());
         this.setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        rankSrc = new ArrayList<>();
-        rankSrc.add("rank-gold");
-        rankSrc.add("rank-sliver");
-        rankSrc.add("bronze-rank");
-        for (int i = 0; i < 5; i++) {
-            rankSrc.add("nomal-rank");
-        }
         try {
             Client.socketHandle.write("get-rank-charts,");
         } catch (IOException ex) {
@@ -53,11 +45,22 @@ public class RankFrm extends javax.swing.JFrame {
         this.listUserStatics = users;
         tableModel.setRowCount(0);
         int i = 0;
+        String rankIcon;
+        // Xác định icon dựa trên thứ hạng
         for (User user : listUserStatics) {
+            if (i == 0) {
+            rankIcon = "rank-gold"; // Hạng nhất - vàng
+            } else if (i == 1) {
+                rankIcon = "rank-sliver"; // Hạng nhì - bạc
+            } else if (i == 2) {
+                rankIcon = "bronze-rank"; // Hạng ba - đồng
+            } else {
+                rankIcon = "nomal-rank"; // Các vị trí còn lại - bình thường
+            }
             tableModel.addRow(new Object[]{
                     i + 1,
                     user.getNickname(),
-                    new ImageIcon("assets/icon/" + rankSrc.get(i) + ".png")
+                    new ImageIcon("assets/icon/" + rankIcon + ".png")
             });
             i++;
         }
